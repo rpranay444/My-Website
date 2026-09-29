@@ -1,4 +1,4 @@
-"""Builds the single-file site: src/ -> site/index.html (the folder Netlify publishes).
+"""Builds the single-file site: src/ -> docs/index.html (the folder Netlify and GitHub Pages publish).
 
 Run from anywhere:  python3 src/build.py
 """
@@ -6,7 +6,7 @@ import os
 import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, '..', 'site', 'index.html')
+OUT = os.path.join(HERE, '..', 'docs', 'index.html')
 
 
 def read(name):
@@ -49,9 +49,9 @@ out = src.replace('</head>', '<style>' + read('enhance.css') + read('fx.css') + 
 j = out.rindex('</body>')
 out = out[:j] + libs + '<script>' + read('enhance.js') + '</script><script>' + read('work_post.js') + '</script><script>' + read('fx.js') + '</script>' + out[j:]
 
-# 6. the résumé PDF, embedded so the download works on any host (site/Pranay-Reddy-Resume.pdf is the source)
+# 6. the résumé PDF, embedded so the download works on any host (docs/Pranay-Reddy-Resume.pdf is the source)
 import base64
-with open(os.path.join(HERE, '..', 'site', 'Pranay-Reddy-Resume.pdf'), 'rb') as f:
+with open(os.path.join(HERE, '..', 'docs', 'Pranay-Reddy-Resume.pdf'), 'rb') as f:
     pdf64 = base64.b64encode(f.read()).decode('ascii')
 j = out.rindex('</body>')
 out = out[:j] + '<script>' + read('resume.js').replace('__RESUME_PDF_BASE64__', pdf64) + '</script>' + out[j:]
@@ -59,4 +59,4 @@ out = out[:j] + '<script>' + read('resume.js').replace('__RESUME_PDF_BASE64__', 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, 'w', encoding='utf-8') as f:
     f.write(out)
-print('site/index.html', len(out) // 1024, 'KB')
+print('docs/index.html', len(out) // 1024, 'KB')

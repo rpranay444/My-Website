@@ -1,7 +1,7 @@
-# Netlify publishes the ready-built page in site/. There is no build step:
-# site/index.html is rebuilt from src/ (python3 src/build.py) before each commit.
+# Netlify publishes the ready-built page in docs/ (GitHub Pages serves the same folder).
+# There is no build step: docs/index.html is rebuilt from src/ (python3 src/build.py) before each commit.
 [build]
-  publish = "site"
+  publish = "docs"
   command = ""
 
 [[headers]]
