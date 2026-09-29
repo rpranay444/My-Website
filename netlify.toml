@@ -1,0 +1,11 @@
+# Netlify publishes the ready-built page in site/. There is no build step:
+# site/index.html is rebuilt from src/ (python3 src/build.py) before each commit.
+[build]
+  publish = "site"
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

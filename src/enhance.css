@@ -1,0 +1,135 @@
+
+/* ───────── Motion layer ───────── */
+:root{--ease-out:cubic-bezier(.23,1,.32,1)}
+html.gsap-on{scroll-behavior:auto}
+/* GSAP owns entrances when motion is on; content stays visible by default */
+.gsap-on .reveal{opacity:1;transform:none;transition:none}
+.m-line{display:block;overflow:hidden;padding:0 .12em .14em 0;margin:0 -.12em -.14em 0}
+.m-line>span{display:inline-block}
+
+/* intro curtain */
+.m-loader{position:fixed;inset:0;z-index:300;background:#191617;color:#f1edea;display:grid;place-items:center;overflow:hidden}
+.m-loader .m-wm{font:700 clamp(4.5rem,11vw,9rem)/1 "Inter Tight",Arial,sans-serif;letter-spacing:-.09em;display:flex;overflow:hidden;padding:0 .1em .1em}
+.m-loader .m-wm span{display:inline-block}
+.m-loader .m-wm .dot{color:#c59caf}
+.m-loader .m-meta{position:absolute;left:clamp(20px,4vw,48px);right:clamp(20px,4vw,48px);bottom:26px;display:flex;justify-content:space-between;gap:16px;font:500 .72rem/1.4 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#9d8e94}
+.m-loader .m-bar{position:absolute;left:0;bottom:0;height:2px;width:100%;background:#a06d80;transform:scaleX(0);transform-origin:left}
+
+/* hero portrait depth (the inner image is scrubbed on scroll, so it keeps its own layer) */
+.m-par{display:block;width:100%;height:100%;will-change:transform}
+.m-par>img{height:100%;width:100%}
+
+/* pointer light on dark surfaces: a fixed-size element moved by transform, painted once */
+.m-spot{position:relative;isolation:isolate}
+.m-glow{position:absolute;left:0;top:0;width:672px;height:672px;margin:-336px 0 0 -336px;z-index:-1;pointer-events:none;opacity:0;transition:opacity .6s ease;background:radial-gradient(circle closest-side,rgba(173,99,124,.22),transparent)}
+
+/* project cards: GSAP drives transform, CSS keeps only the colour and shadow changes */
+.projects-grid{perspective:1600px}
+.project-card{transform-style:preserve-3d}
+.gsap-on .project-card{transition:box-shadow .35s var(--ease),border-color .35s var(--ease)}
+.project-banner{position:relative;overflow:hidden}
+.m-glare{position:absolute;left:0;top:0;width:418px;height:418px;margin:-209px 0 0 -209px;pointer-events:none;opacity:0;transition:opacity .45s ease;background:radial-gradient(circle closest-side,rgba(255,255,255,.18),transparent)}
+.project-banner .project-proof strong{display:inline-block}
+
+/* primary actions: magnetic under GSAP, so no competing CSS transform transition */
+.gsap-on .button.primary{transition:background-color .25s ease,color .25s ease}
+
+/* photo hover badge: arrives from 0.8 with a fade, never from nothing */
+.m-view{position:fixed;left:0;top:0;width:88px;height:88px;margin:-44px 0 0 -44px;border-radius:50%;background:#582d3d;color:#fff;display:grid;place-items:center;font:500 .72rem/1 "Inter",Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;z-index:150;opacity:0;transform:scale(.8);box-shadow:0 14px 30px rgba(36,20,28,.28)}
+@media (hover:none){.m-view{display:none}}
+.gsap-on .image-frame .image-open{transition:transform .5s cubic-bezier(.22,.68,0,1),opacity .5s}
+@media (hover:hover){.gsap-on .image-frame .image-open{transform:translateY(8px);opacity:0}.gsap-on .image-frame:hover .image-open,.gsap-on .image-frame:focus-visible .image-open{transform:none;opacity:1}}
+
+/* experience rules draw in wine */
+.career-row{position:relative}
+.m-rule{position:absolute;left:0;right:0;top:-1px;height:1px;background:#582d3d;transform:scaleX(0);transform-origin:left;pointer-events:none}
+.no-motion .m-rule{display:none}
+
+/* smooth details; the plus turns back the moment closing starts */
+.gsap-on details>ul{overflow:hidden}
+details.m-closing summary span{transform:none}
+/* the plus and the case arrow turn on a strong ease-out: they answer at once and settle softly */
+summary span,.case-button span{transition:transform .2s var(--ease-out)}
+
+/* journey progress */
+.m-mprog{position:relative;height:2px;background:var(--line);margin-top:0}
+.m-mprog i{position:absolute;inset:0;background:var(--wine);transform-origin:left;transform:scaleX(0)}
+.milestone-panel{overflow:hidden}
+#milestone-year{display:inline-block}
+
+/* sport section flight path */
+.sport-section{position:relative;overflow:hidden}
+.m-arc{position:absolute;top:0;right:0;width:min(820px,64vw);height:auto;pointer-events:none;z-index:0;opacity:.85}
+.sport-section .container{position:relative;z-index:1}
+@media(max-width:760px){.m-arc{width:110vw;right:-30vw;opacity:.5}}
+
+/* contact links: underline grows in unhurried, leaves quickly */
+.contact-links a::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-out)}
+.contact-links b{transition:transform .25s var(--ease-out)}
+
+/* header hide/show */
+.site-header{will-change:transform}
+
+/* ── hover only where a real pointer can hover ── */
+@media (hover:hover) and (pointer:fine){
+  .m-spot:hover>.m-glow{opacity:1}
+  .project-card:hover .m-glare{opacity:1}
+  .contact-links a:hover::after{transform:scaleX(1);transition-duration:.55s}
+  .contact-links a:hover b{transform:translate(4px,-4px);transition-duration:.4s}
+  .nav-inner nav a:hover{color:#fff}
+  .text-button:hover{border-bottom-color:var(--wine)}
+  .timeline-arrows button:hover,.close-dialog:hover{border-color:var(--wine);color:var(--wine)}
+  #photo-dialog .close-dialog:hover{border-color:#c59caf;color:#f1edea}
+  .timeline-years button:not([aria-pressed=true]):hover{border-color:#b295a1}
+  .dialog-foot button:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+}
+/* touch: a tap should not leave a card lifted or a photo zoomed */
+@media (hover:none){
+  .primary:hover{transform:none}
+  .project-card:hover{transform:none;box-shadow:0 3px 12px #24151b05;border-color:#d4c8cd}
+  .image-frame:hover img,#court .photo-pair .image-frame:hover img{transform:none;filter:saturate(.65)}
+  .case-button:hover span{transform:none}
+}
+
+/* ── nav: active underline draws in instead of appearing ── */
+.nav-inner nav a{transition:color .2s ease}
+.nav-inner nav a::after{content:"";position:absolute;height:1px;background:#c59caf;bottom:-9px;left:0;right:0;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease-out)}
+.nav-inner nav a.active::after{transform:scaleX(1)}
+
+/* ── press feedback: every control answers the click ── */
+.button,.case-button,.filters button,.cf-nav button,.timeline-arrows button,.timeline-years button,.close-dialog,.dialog-foot button{transition-property:transform,background-color,color,border-color,opacity;transition-duration:.16s,.25s,.25s,.25s,.25s;transition-timing-function:var(--ease-out),ease,ease,ease,ease}
+.button:active,.case-button:active,.filters button:active,.cf-nav button:not(:disabled):active,.timeline-arrows button:active,.timeline-years button:active,.close-dialog:active,.dialog-foot button:active{transform:scale(.97)}
+.text-button{transition-property:transform,border-color}
+
+/* ── browser surfaces carry the palette too ── */
+html{scrollbar-color:#b6a3ab var(--bg)}
+dialog{scrollbar-width:thin;scrollbar-color:#b6a3ab transparent}
+#photo-dialog{scrollbar-color:#66505b transparent}
+#photo-count,#case-count,#cf-pos{font-variant-numeric:tabular-nums}
+
+.no-motion .m-loader,.no-motion .m-view{display:none!important}
+@media(prefers-reduced-motion:reduce){
+  .m-loader,.m-view,.m-arc .m-sh{display:none!important}
+  /* reduced motion keeps gentle colour and fade feedback, and drops movement */
+  html.no-motion *,html.no-motion *::before,html.no-motion *::after{transition-property:color,background-color,border-color,opacity!important;transition-duration:.15s!important;transition-timing-function:ease!important}
+}
+.contact-section{overflow:hidden}
+
+/* court photos: wider view, same uniform frames */
+#court .photo-pair .image-frame{aspect-ratio:4/3}
+@media (hover:hover){#court .photo-pair .image-frame:hover img{transform:scale(1.015)}}
+
+/* the 3D shuttlecock on the badminton flight path (same box as the arc) */
+.m-arc3d{position:absolute;top:0;right:0;width:min(820px,64vw);aspect-ratio:820/150;height:auto;pointer-events:none;z-index:0;display:block}
+@media(max-width:760px){.m-arc3d{width:110vw;right:-30vw}}
+.m-fly{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.m-loader .m-bar{z-index:1}
+.m-loader .m-wm{position:relative;z-index:1}
+/* the wordmark and meta wait, hidden, for the intro to start, so they never show static and then jump */
+.m-loader .m-wm,.m-loader .m-meta{opacity:0}
+.m-loader .m-meta{z-index:1}
+/* record cards take the pointer light like the project banners */
+.sport-record>div{position:relative;overflow:hidden}
+@media (hover:hover) and (pointer:fine){.sport-record>div:hover .m-glare{opacity:1}}
+.no-motion .m-arc3d,.no-motion .m-fly{display:none}
+@media(prefers-reduced-motion:reduce){.m-arc3d,.m-fly{display:none}}

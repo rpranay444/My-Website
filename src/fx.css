@@ -1,0 +1,16 @@
+
+/* proof ticker */
+.m-ticker{position:relative;overflow:hidden;border-bottom:1px solid var(--line);padding-block:22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.m-ticker-track{display:flex;width:max-content;will-change:transform}
+.m-ticker-set{display:flex;align-items:center;flex:none}
+.m-ticker-set span{display:inline-flex;align-items:center;gap:28px;padding-right:28px;white-space:nowrap;font:500 1.55rem/1.2 "Inter Tight",Arial,sans-serif;letter-spacing:-.03em;color:var(--ink)}
+.m-ticker-set span em{font-family:Georgia,'Times New Roman',serif;font-style:italic;color:var(--wine);letter-spacing:-.02em}
+.m-ticker-set span::after{content:"";width:8px;height:8px;background:#a06d80;transform:rotate(45deg);flex:none}
+@media(max-width:760px){.m-ticker{padding-block:16px}.m-ticker-set span{font-size:1.15rem;gap:20px;padding-right:20px}}
+
+
+.m-ticker-set span>b{font-weight:inherit;white-space:nowrap}
+/* without the loop (Motion off or reduced motion) the list can still be read by scrolling it */
+html:not(.gsap-on) .m-ticker{overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain}
+html:not(.gsap-on) .m-ticker::-webkit-scrollbar{display:none}
+html:not(.gsap-on) .m-ticker-set[aria-hidden="true"]{display:none}

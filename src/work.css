@@ -1,0 +1,73 @@
+
+/* ───────── Work: case files ───────── */
+.mk{display:inline-block;width:9px;height:9px;flex:none;vertical-align:.05em}
+.cf-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 24px;flex-wrap:wrap}
+.cf-toolbar .filters{overflow-x:auto;scrollbar-width:none;max-width:100%}
+.cf-toolbar .filters::-webkit-scrollbar{display:none}
+.cf-toolbar .filters button{white-space:nowrap}
+.project-card .project-banner .eyebrow{display:inline-flex;align-items:center;gap:8px}
+.project-card .project-banner .mk{color:#e3c7d2}
+.projects-grid .project-card .project-banner{background:#582d3d;border-bottom-color:#734459}
+.projects-grid .project-card.alt .project-banner{background:#292327;border-bottom-color:#4d3d45}
+.project-status{display:inline-flex;align-items:center;gap:8px}
+.project-status::before{content:"";width:6px;height:6px;border-radius:50%;background:#916175}
+
+/* ── case files rail ── */
+.projects-grid.cf-rail{display:flex;grid-template-columns:none;grid-auto-rows:auto;gap:24px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:10px 0 20px;margin-top:-10px;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab;outline-offset:6px}
+.cf-rail::-webkit-scrollbar{display:none}
+.cf-rail.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.cf-rail.dragging .project-card{pointer-events:none}
+.cf-rail>.project-card{flex:0 0 calc((100% - 48px)/3.2);scroll-snap-align:start;min-width:0}
+.cf-rail .project-banner{min-height:184px;padding:22px 24px 24px;justify-content:space-between}
+.cf-rail .project-banner .card-top{margin-bottom:18px}
+.cf-rail .project-proof{flex-direction:column;align-items:flex-start;gap:6px}
+.cf-rail .project-proof strong{font-size:3rem}
+.cf-rail .proof-wide strong{font-size:2.4rem}
+.cf-rail .project-proof span{max-width:none;margin:0;font-size:.8125rem}
+.cf-rail .project-card-body{padding:22px 24px 24px}
+.cf-rail .project-card-body h3{font-size:1.4rem;line-height:1.25;margin-bottom:12px}
+.cf-rail .project-xyz{font-size:.9375rem;line-height:1.6;margin-bottom:14px}
+.cf-rail .project-use{font-size:.8125rem;line-height:1.55;padding:12px 14px}
+.cf-rail .project-methods{margin:14px 0 18px}
+.cf-rail .card-bottom{flex-direction:row;align-items:center;gap:12px}
+.cf-nav{display:flex;align-items:center;gap:8px}
+#cf-pos{font:500 .75rem/1 "IBM Plex Mono",monospace;letter-spacing:.08em;color:var(--muted);margin-right:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cf-nav button{width:42px;height:42px;border:1px solid var(--line);background:transparent;font-size:1.05rem;transition:background .25s,color .25s,border-color .25s,opacity .25s}
+.cf-nav button:hover:not(:disabled){background:var(--wine);border-color:var(--wine);color:#fff}
+.cf-nav button:disabled{opacity:.3;cursor:default}
+.cf-track{height:2px;background:var(--line);overflow:hidden;margin-top:4px}
+.cf-track i{display:block;height:100%;width:30%;background:var(--wine);transition:transform .15s linear}
+@media(max-width:1000px){.cf-rail>.project-card{flex-basis:calc((100% - 24px)/2.15)}}
+@media(max-width:640px){.projects-grid.cf-rail{gap:14px}.cf-rail>.project-card{flex-basis:86%}.cf-toolbar{gap:12px}.cf-nav{width:100%;justify-content:flex-end}}
+
+/* ── event photos: same layout as the other photo pairs, slightly taller frame for these portrait shots ── */
+.professional-pair .image-frame{aspect-ratio:4/3}
+.professional-pair .interview-frame img{object-position:50% 34%}
+.professional-pair .event-frame img{object-position:50% 38%}
+
+/* ── experience: role cards side by side ── */
+.career-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.career-list .career-row{display:flex;flex-direction:column;gap:14px;padding:28px;border:1px solid #d6cdd0;background:#f7f5f3}
+.career-list .career-meta{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.career-list .career-meta p{margin:0}
+.career-list .career-body{display:flex;flex-direction:column;flex:1}
+.career-list .career-body h3{font-size:1.65rem}
+.career-list .career-body>p:not(.role){margin-top:12px;font-size:.9375rem}
+.career-list .role-results{margin:16px 0 18px}
+.career-list .role-results>span{min-width:0;flex:1 1 118px;padding:12px 14px}
+.career-list .role-results strong{font-size:1.5rem}
+.career-list details{margin-top:auto}
+@media(max-width:900px){.career-list{grid-template-columns:1fr;gap:16px}}
+@media(max-width:520px){.career-list .career-row{padding:22px}}
+
+/* ── badminton: secondary achievements, one step below the record cards ── */
+.sport-more{margin-top:40px;padding-top:22px;border-top:1px solid #4b3d43}
+.sport-more-label{font-size:.6875rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#c59caf;margin:0 0 16px}
+.sport-more-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.sport-more-grid>div{display:flex;flex-direction:column;gap:6px;padding:4px 20px 4px 0}
+.sport-more-grid>div+div{padding-left:20px;border-left:1px solid #4b3d43}
+.sport-more-grid strong{font:500 1.5rem/1.15 var(--display);letter-spacing:-.03em;color:#f1edea}
+.sport-more-grid span{font-size:.8125rem;line-height:1.5;color:#b9adb2}
+@media(max-width:760px){.sport-more-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px}.sport-more-grid>div:nth-child(3){border-left:0;padding-left:0}.sport-more-grid strong{font-size:1.2rem}}
+/* record labels keep an 11px floor on small screens */
+@media(max-width:760px){.sport-record .record-label{font-size:.6875rem}}
