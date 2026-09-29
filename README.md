@@ -14,6 +14,6 @@ A single-page portfolio. Netlify serves `site/index.html` and republishes it aut
 
 ## Making a change
 
-1. Edit the files in `src/`.
-2. Run `python3 src/build.py`, which rewrites `site/index.html`.
+1. Edit the files in `src/`. To change the résumé, replace `site/Pranay-Reddy-Resume.pdf`.
+2. Run `python3 src/build.py`, which rewrites `site/index.html` (the résumé is embedded in it too).
 3. Commit both, then push to `main`. Netlify publishes within a minute.

@@ -49,6 +49,13 @@ out = src.replace('</head>', '<style>' + read('enhance.css') + read('fx.css') + 
 j = out.rindex('</body>')
 out = out[:j] + libs + '<script>' + read('enhance.js') + '</script><script>' + read('work_post.js') + '</script><script>' + read('fx.js') + '</script>' + out[j:]
 
+# 6. the résumé PDF, embedded so the download works on any host (site/Pranay-Reddy-Resume.pdf is the source)
+import base64
+with open(os.path.join(HERE, '..', 'site', 'Pranay-Reddy-Resume.pdf'), 'rb') as f:
+    pdf64 = base64.b64encode(f.read()).decode('ascii')
+j = out.rindex('</body>')
+out = out[:j] + '<script>' + read('resume.js').replace('__RESUME_PDF_BASE64__', pdf64) + '</script>' + out[j:]
+
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, 'w', encoding='utf-8') as f:
     f.write(out)
