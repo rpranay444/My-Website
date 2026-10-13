@@ -1,0 +1,12 @@
+
+/* ───────── Energy layer (hype.js) ───────── */
+.h-grain{position:fixed;left:-50%;top:-50%;width:200%;height:200%;pointer-events:none;z-index:120;opacity:.055;background-size:160px 160px;animation:h-grain .9s steps(5) infinite}
+@keyframes h-grain{0%{transform:translate(0,0)}20%{transform:translate(-5%,3%)}40%{transform:translate(3%,-6%)}60%{transform:translate(-7%,6%)}80%{transform:translate(6%,2%)}100%{transform:translate(0,0)}}
+.h-ring,.h-dot{position:fixed;left:0;top:0;pointer-events:none;z-index:170;border-radius:50%;mix-blend-mode:difference;visibility:hidden;opacity:0}
+.h-ring{width:38px;height:38px;margin:-19px 0 0 -19px;border:1.5px solid #fff}
+.h-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:#fff}
+.hero h1 .h-ch{display:inline-block;transform-origin:50% 80%;will-change:transform}
+/* after the name has risen in, its letters may lift past their line mask */
+.hero h1.h-free .m-line{overflow:visible}
+.no-motion .h-grain,.no-motion .h-ring,.no-motion .h-dot{display:none!important}
+@media(prefers-reduced-motion:reduce){.h-grain,.h-ring,.h-dot{display:none!important}}

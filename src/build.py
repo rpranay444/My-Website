@@ -45,9 +45,9 @@ libs = ''.join('<script>' + read('libs/' + p) + '</script>\n' for p in [
 
 pre = '''<script>(function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;try{if(sessionStorage.getItem('pr-intro'))return;sessionStorage.setItem('pr-intro','1')}catch(e){}var d=document.createElement('div');d.className='m-loader';d.setAttribute('aria-hidden','true');d.innerHTML='<div class="m-wm"><span>p</span><span>r</span><span class="dot">.</span></div><div class="m-meta"><span>Pranay Reddy</span><span>Marketing &amp; Strategy · Singapore</span></div><div class="m-bar"></div>';document.body.appendChild(d);setTimeout(function(){if(d.parentNode)d.remove()},7000)})()</script>'''
 
-out = src.replace('</head>', '<style>' + read('enhance.css') + read('fx.css') + '</style></head>', 1).replace('<body>', '<body>' + pre, 1)
+out = src.replace('</head>', '<style>' + read('enhance.css') + read('fx.css') + read('hype.css') + '</style></head>', 1).replace('<body>', '<body>' + pre, 1)
 j = out.rindex('</body>')
-out = out[:j] + libs + '<script>' + read('enhance.js') + '</script><script>' + read('work_post.js') + '</script><script>' + read('fx.js') + '</script>' + out[j:]
+out = out[:j] + libs + '<script>' + read('enhance.js') + '</script><script>' + read('work_post.js') + '</script><script>' + read('fx.js') + '</script><script>' + read('hype.js') + '</script>' + out[j:]
 
 # 6. the résumé PDF, embedded so the download works on any host (docs/Pranay-Reddy-Resume.pdf is the source)
 import base64
